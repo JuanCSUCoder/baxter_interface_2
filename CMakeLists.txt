@@ -21,8 +21,15 @@ ament_target_dependencies(
   "moveit_ros_planning_interface"
   "rclcpp"
 )
+ament_target_dependencies(
+  baxter_tests
+  "moveit_ros_planning_interface"
+  "rclcpp"
+)
 
 install(TARGETS baxter_interface_2
+  DESTINATION lib/${PROJECT_NAME})
+install(TARGETS baxter_tests
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

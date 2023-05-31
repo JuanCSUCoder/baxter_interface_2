@@ -20,6 +20,15 @@ int main(int argc, char **argv)
     std::thread thread([&executor]()
                        { executor.spin(); });
 
+    while (!executor.is_spinning())
+    {
+        RCLCPP_ERROR(logger, "Executor Not Spinning");
+        using namespace std::chrono_literals;
+        rclcpp::sleep_for(1s);
+    }
+
+    RCLCPP_INFO(logger, "Executor Ready");
+
     // Create the MoveIt MoveGroup Interface
     auto move_group_interface = moveit::planning_interface::MoveGroupInterface(node, "left_arm");
 
@@ -73,6 +82,7 @@ int main(int argc, char **argv)
         RCLCPP_ERROR(logger, "Unable to plan movement");
     }
 
+    thread.join();
     rclcpp::shutdown();
     return 0;
 }

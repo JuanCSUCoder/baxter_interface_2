@@ -14,7 +14,39 @@ int main(int argc, char **argv)
 
     auto const logger = rclcpp::get_logger("Baxter Interface Test Node");
 
-    // TODO: MoveIt Baxter Rviz
+    // Create the MoveIt MoveGroup Interface
+    auto move_group_interface = moveit::planning_interface::MoveGroupInterface(node, "left_arm");
+    auto const target_pose = []
+    {
+        geometry_msgs::msg::Pose msg;
+        
+        msg.orientation.w = 1.0;
+        msg.position.x = 0.5;
+        msg.position.y = 0.5;
+        msg.position.z = 0.5;
+
+        return msg;
+    }();
+
+    move_group_interface.setPoseTarget(target_pose);
+
+    // Create a plan to target pose
+    auto const [success, plan] = [&move_group_interface]
+    {
+        moveit::planning_interface::MoveGroupInterface::Plan p;
+        auto const ok = static_cast<bool>(move_group_interface.plan(p));
+        return std::make_pair(ok, p);
+    }();
+
+    // Execute plan
+    if (success)
+    {
+        move_group_interface.execute(plan);
+    }
+    else
+    {
+        RCLCPP_ERROR(logger, "Unable to plan movement");
+    }
 
     rclcpp::shutdown();
     return 0;

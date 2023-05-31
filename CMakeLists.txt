@@ -10,28 +10,43 @@ find_package(ament_cmake REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(rclcpp REQUIRED)
 
+# Executable Test Program
 add_executable(baxter_tests src/baxter_tests.cpp)
-add_library(baxter_interface_2 src/ik_interface.cpp)
+
 target_include_directories(baxter_tests PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
+
 target_compile_features(baxter_tests PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
-ament_target_dependencies(
-  baxter_interface_2
-  "moveit_ros_planning_interface"
-  "rclcpp"
-)
+
 ament_target_dependencies(
   baxter_tests
   "moveit_ros_planning_interface"
   "rclcpp"
 )
 
-install(TARGETS baxter_interface_2
-  DESTINATION lib/${PROJECT_NAME})
 install(TARGETS baxter_tests
   DESTINATION lib/${PROJECT_NAME})
 
+# Library Compilation
+add_library(baxter_interface_2 src/ik_interface.cpp)
+
+target_include_directories(baxter_interface_2 PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+
+target_compile_features(baxter_interface_2 PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+
+ament_target_dependencies(
+  baxter_interface_2
+  "moveit_ros_planning_interface"
+  "rclcpp"
+)
+
+install(TARGETS baxter_interface_2
+  DESTINATION lib/${PROJECT_NAME})
+
+# Auto-generated testing block
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights

@@ -15,8 +15,10 @@ int main(int argc, char **argv)
     auto const logger = node->get_logger();
 
     // Creates MultiThreadedExecutor
-    rclcpp::executors::MultiThreadedExecutor me;
-    me.add_node(node);
+    rclcpp::executors::MultiThreadedExecutor executor;
+    executor.add_node(node);
+    std::thread thread([&executor]()
+                       { executor.spin(); });
 
     // Create the MoveIt MoveGroup Interface
     auto move_group_interface = moveit::planning_interface::MoveGroupInterface(node, "left_arm");

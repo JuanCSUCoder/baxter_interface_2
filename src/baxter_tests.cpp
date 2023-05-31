@@ -12,7 +12,11 @@ int main(int argc, char **argv)
         "baxter_interface_test_node",
         rclcpp::NodeOptions().automatically_declare_parameters_from_overrides(true));
 
-    auto const logger = rclcpp::get_logger("Baxter Interface Test Node");
+    auto const logger = node->get_logger();
+
+    // Creates MultiThreadedExecutor
+    rclcpp::executors::MultiThreadedExecutor me;
+    me.add_node(node);
 
     // Create the MoveIt MoveGroup Interface
     auto move_group_interface = moveit::planning_interface::MoveGroupInterface(node, "left_arm");

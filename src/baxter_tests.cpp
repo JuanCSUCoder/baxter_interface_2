@@ -41,10 +41,14 @@ int main(int argc, char **argv)
     {
         geometry_msgs::msg::Pose msg;
         
-        msg.orientation.w = 1.0;
-        msg.position.x = 0.5;
-        msg.position.y = 0.5;
-        msg.position.z = 0.5;
+        msg.orientation.w = 0.365370;
+        msg.orientation.x = 0.804754;
+        msg.orientation.y = 0.329520;
+        msg.orientation.z = 0.332104;
+
+        msg.position.x = 0.985046;
+        msg.position.y = -0.088315;
+        msg.position.z = 0.231450;
 
         return msg;
     }();

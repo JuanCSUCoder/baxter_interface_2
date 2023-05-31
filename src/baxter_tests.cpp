@@ -82,7 +82,6 @@ int main(int argc, char **argv)
         RCLCPP_ERROR(logger, "Unable to plan movement");
     }
 
-    thread.join();
     rclcpp::shutdown();
     return 0;
 }

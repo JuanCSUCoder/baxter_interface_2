@@ -27,15 +27,15 @@ int main(int argc, char **argv)
     auto const current_pose = move_group_interface.getCurrentPose().pose;
 
     RCLCPP_INFO(logger, "Orientation:");
-    RCLCPP_INFO(logger, "W: %d", current_pose.orientation.w);
-    RCLCPP_INFO(logger, "X: %d", current_pose.orientation.x);
-    RCLCPP_INFO(logger, "Y: %d", current_pose.orientation.y);
-    RCLCPP_INFO(logger, "Z: %d", current_pose.orientation.z);
+    RCLCPP_INFO(logger, "W: %f", current_pose.orientation.w);
+    RCLCPP_INFO(logger, "X: %f", current_pose.orientation.x);
+    RCLCPP_INFO(logger, "Y: %f", current_pose.orientation.y);
+    RCLCPP_INFO(logger, "Z: %f", current_pose.orientation.z);
 
     RCLCPP_INFO(logger, "Position:");
-    RCLCPP_INFO(logger, "X: %d", current_pose.position.x);
-    RCLCPP_INFO(logger, "Y: %d", current_pose.position.y);
-    RCLCPP_INFO(logger, "Z: %d", current_pose.position.z);
+    RCLCPP_INFO(logger, "X: %f", current_pose.position.x);
+    RCLCPP_INFO(logger, "Y: %f", current_pose.position.y);
+    RCLCPP_INFO(logger, "Z: %f", current_pose.position.z);
 
     auto const target_pose = []
     {

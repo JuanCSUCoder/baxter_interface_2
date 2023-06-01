@@ -1,8 +1,3 @@
-#include <memory>
-
-#include <rclcpp/rclcpp.hpp>
-#include <moveit/move_group_interface/move_group_interface.h>
-
 #include <baxter_interface_2/robot.hpp>
 
 int main(int argc, char **argv)

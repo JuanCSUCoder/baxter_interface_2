@@ -38,4 +38,5 @@ int main(int argc, char **argv)
 
 ## Running on Moveit
 
-TODO
+![Terminal GIF](./terminal.gif)
+![MoveIt GIF](./moveit.gif)

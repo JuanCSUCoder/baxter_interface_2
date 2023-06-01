@@ -29,7 +29,7 @@ install(TARGETS baxter_tests
   DESTINATION lib/${PROJECT_NAME})
 
 # Library Compilation
-add_library(baxter_interface_2 src/ik_interface.cpp src/robot.cpp)
+add_library(baxter_interface_2 src/ik_interface.cpp src/robot.cpp include/baxter_interface_2/robot.hpp)
 
 target_include_directories(baxter_interface_2 PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

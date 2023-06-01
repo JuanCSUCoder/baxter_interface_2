@@ -6,12 +6,14 @@ BaxterRobot::BaxterRobot()
         "baxter_interface_controller",
         rclcpp::NodeOptions().automatically_declare_parameters_from_overrides(true));
 
-    // Creates MultiThreadedExecutor
-    this->executor.add_node(node);
 
     auto const exec_pt = &this->executor;
-    std::thread thread([exec_pt]()
-                       { exec_pt->spin(); });
+    auto const node_pt = &this->node;
+    this->exec_thread = std::make_unique<std::thread>([exec_pt, node_pt]()
+                                                      { 
+        exec_pt->add_node(*node_pt);
+        exec_pt->spin(); 
+        exec_pt->remove_node(*node_pt); });
 
     while (!this->executor.is_spinning())
     {

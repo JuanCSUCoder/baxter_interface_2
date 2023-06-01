@@ -11,6 +11,8 @@ private:
     rclcpp::Node::SharedPtr node;
     rclcpp::executors::MultiThreadedExecutor executor;
 
+    std::unique_ptr<std::thread> exec_thread;
+
     void print_the_pose(geometry_msgs::msg::Pose pose);
 
 public:

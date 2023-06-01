@@ -13,11 +13,15 @@ find_package(rclcpp REQUIRED)
 # Executable Test Program
 add_executable(baxter_tests src/baxter_tests.cpp)
 
+add_dependencies(baxter_tests baxter_interface_2)
+
 target_include_directories(baxter_tests PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 
 target_compile_features(baxter_tests PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
+
+target_link_libraries(baxter_tests baxter_interface_2)
 
 ament_target_dependencies(
   baxter_tests

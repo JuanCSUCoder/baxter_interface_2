@@ -3,7 +3,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <moveit/move_group_interface/move_group_interface.h>
 
-#include <baxter_interface_2/ik_interface.hpp>
+#include <baxter_interface_2/robot.hpp>
 
 int main(int argc, char **argv)
 {
@@ -25,7 +25,10 @@ int main(int argc, char **argv)
         return msg;
     }();
 
-    
+    BaxterRobot robot;
+
+    robot.print_pose();
+    robot.left_arm_to_target(target_pose);
 
     rclcpp::shutdown();
     return 0;

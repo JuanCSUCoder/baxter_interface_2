@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv)
 {
-    rclcpp::init(0, nullptr);
+    rclcpp::init(argc, argv);
 
     auto const target_pose = []
     {

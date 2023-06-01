@@ -25,10 +25,16 @@ int main(int argc, char **argv)
         return msg;
     }();
 
+    auto const logger = rclcpp::get_logger("Baxter Tests");
+
+    RCLCPP_INFO(logger, "Started test!");
+
     BaxterRobot robot;
 
     robot.print_pose();
     robot.left_arm_to_target(target_pose);
+
+    RCLCPP_INFO(logger, "Terminating ...");
 
     rclcpp::shutdown();
     return 0;
